@@ -1,9 +1,9 @@
 from fastapi import FastAPI
-# import asyncio
+import asyncio
 import uvicorn
 
 from api.routers import router
-# from database import create_metadata
+from database import create_metadata
 
 
 app = FastAPI(
@@ -13,8 +13,8 @@ app = FastAPI(
 app.include_router(router)
 
 
-# async def main():
-#     await create_metadata()
+async def main():
+    await create_metadata()
 
 
 if __name__ == '__main__':

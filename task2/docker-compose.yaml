@@ -8,3 +8,18 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - '5433:5432'
+    networks:
+      - app
+
+  app:
+    build: .
+    depends_on:
+      - postgres
+    restart: always
+    ports:
+      - "8000:8000"
+    networks:
+      - app
+
+networks:
+  app:
