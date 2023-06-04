@@ -7,9 +7,9 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
-      - '5433:5432'
+      - '5432:5432'
     networks:
-      - app
+      - task2
 
   app:
     build: .
@@ -19,7 +19,7 @@ services:
     ports:
       - "8000:8000"
     networks:
-      - app
+      - task2
 
 networks:
-  app:
+  task2:

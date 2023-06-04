@@ -1,9 +1,5 @@
 from fastapi import FastAPI
-from .api.routers import router
-from .tables import Base
-from .database import engine
-
-Base.metadata.create_all(bind=engine)
+from api.routers import router
 
 app = FastAPI(
     title='task1'

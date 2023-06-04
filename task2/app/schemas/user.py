@@ -14,3 +14,10 @@ class User(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class UsersList(User):
+    username: str
+
+    class Config:
+        orm_mode = True

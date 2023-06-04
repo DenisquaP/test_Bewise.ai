@@ -1,4 +1,6 @@
-FROM python:3.8
+FROM python:3.10
+
+RUN mkdir /code
 
 WORKDIR /code
 
@@ -6,8 +8,6 @@ COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
-COPY . .
+COPY ./app /code
 
-COPY app/alembic.ini code/alembic.ini
-
-ENV ALEMBIC_CONFIG=code/alembic.ini
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

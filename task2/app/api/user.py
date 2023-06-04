@@ -2,8 +2,9 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from uuid import uuid4
+from typing import List
 
-from schemas.user import User, UserPOST
+from schemas.user import User, UserPOST, UsersList
 from tables import Users
 from database import get_session
 
@@ -31,11 +32,10 @@ async def create_user(body: UserPOST, db: AsyncSession = Depends(get_session)):
 
 @user_router.get(
     '/user/',
+    status_code=201,
     tags=['User'],
+    response_model=List[UsersList]
 )
 async def get_users(db: AsyncSession = Depends(get_session)):
-    # users = await db.execute(text('SELECT * FROM users'))
-    print('hi')
     result = await db.execute(select(Users))
-    users = await result.fetchall()
-    return users
+    return result.scalars().all()

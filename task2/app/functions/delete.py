@@ -2,7 +2,7 @@ import os
 from fastapi import HTTPException
 
 
-async def delete_file(path):
+def delete_file(path):
     try:
         os.remove(path)
     except FileNotFoundError:

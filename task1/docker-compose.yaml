@@ -1,29 +1,25 @@
-version: '3'
-
+version: '3.9'
 services:
-  db:
+  postgres:
     image: postgres
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
-    volumes:
-      - ./data:/var/lib/postgresql/data
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     ports:
-      - "5432:5432"
-    networks:
-      - app
+      - '5432:5432'
+#     networks:
+#       - app
 
-  app:
-    build: .
-    ports:
-      - "8000:8000"
-    command: sh -c "alembic upgrade head && uvicorn app.main:app --reload"
-    depends_on:
-      - db
-    networks:
-      - app
+#   app:
+#     build: .
+#     depends_on:
+#       - postgres
+#     restart: always
+#     ports:
+#       - "8000:8000"c
+#     networks:
+#       - app
 
-networks:
-  app:
+# networks:
+#   app:

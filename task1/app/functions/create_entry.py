@@ -1,4 +1,4 @@
-from ..tables import Questions
+from tables import Questions
 
 
 def create_new_entry(question_dict: dict) -> Questions:
