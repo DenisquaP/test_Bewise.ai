@@ -32,9 +32,10 @@ async def question(question: QuestionNum, db: AsyncSession = Depends(get_session
             while new_question.get('id') in questions_in_bd:
                 new_question = await get_questions()[0]
             questions.append(create_new_entry(new_question))
+            db.add(create_new_entry(new_question))
             continue
 
         questions.append(create_new_entry(i))
-    db.add_all(questions)
+        db.add(create_new_entry(i))
     await db.commit()
     return questions

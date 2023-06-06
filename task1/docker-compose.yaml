@@ -2,24 +2,30 @@ version: '3.9'
 services:
   postgres:
     image: postgres
+    volumes:
+      - postgres_data_task1:/var/lib/postgresql/data/
     restart: always
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
     ports:
       - '5432:5432'
-#     networks:
-#       - app
+    networks:
+      - task1
 
-#   app:
-#     build: .
-#     depends_on:
-#       - postgres
-#     restart: always
-#     ports:
-#       - "8000:8000"c
-#     networks:
-#       - app
+  app:
+    build: .
+    depends_on:
+      - postgres
+    restart: always
+    ports:
+      - "8000:8000"
+    networks:
+      - task1
 
-# networks:
-#   app:
+networks:
+  task1:
+
+volumes:
+  postgres_data_task1:
