@@ -101,7 +101,17 @@ cd test_Bewise.ai/task2
         ```
     - Команда остановит контейнеры и удалит контейнер с приложением
     - В случае возникновения ошибки запуска на линуксе попробуйте поменять docker compose на docker-compose
-
+    - Если не работает make, то выполнить следующие действия по порядку:
+        - Linux/Mac:
+            ```
+            sudo docker compose up -d --build
+            sudo docker exec task1-app-1 alembic upgrade heads
+            ```
+        - Windows:
+            ```
+            docker-compose up -d --build
+            docker exec task1-app-1 alembic upgrade heads
+            ```
 
 ***
 ## Подключение к базе данных с помощью dbeaver
