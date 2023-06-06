@@ -1,0 +1,298 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+      "title": "task2",
+      "version": "0.1.0"
+    },
+    "paths": {
+      "/user/": {
+        "get": {
+          "tags": [
+            "User"
+          ],
+          "summary": "Get Users",
+          "operationId": "get_users_user__get",
+          "responses": {
+            "201": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "Response Get Users User  Get",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/UsersList"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "User"
+          ],
+          "summary": "Create User",
+          "operationId": "create_user_user__post",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserPOST"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "201": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/record/": {
+        "get": {
+          "tags": [
+            "Record"
+          ],
+          "summary": "Get Record",
+          "operationId": "get_record_record__get",
+          "parameters": [
+            {
+              "required": true,
+              "schema": {
+                "title": "User Id",
+                "type": "integer"
+              },
+              "name": "user_id",
+              "in": "query"
+            },
+            {
+              "required": true,
+              "schema": {
+                "title": "Record Id",
+                "type": "string"
+              },
+              "name": "record_id",
+              "in": "query"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful Response"
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Record"
+          ],
+          "summary": "Add Song",
+          "operationId": "add_song_record__post",
+          "parameters": [
+            {
+              "required": true,
+              "schema": {
+                "title": "User Id",
+                "type": "integer"
+              },
+              "name": "user_id",
+              "in": "query"
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/Body_add_song_record__post"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "201": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Record"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Body_add_song_record__post": {
+          "title": "Body_add_song_record__post",
+          "required": [
+            "file"
+          ],
+          "type": "object",
+          "properties": {
+            "file": {
+              "title": "File",
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        },
+        "HTTPValidationError": {
+          "title": "HTTPValidationError",
+          "type": "object",
+          "properties": {
+            "detail": {
+              "title": "Detail",
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ValidationError"
+              }
+            }
+          }
+        },
+        "Record": {
+          "title": "Record",
+          "required": [
+            "link"
+          ],
+          "type": "object",
+          "properties": {
+            "link": {
+              "title": "Link",
+              "type": "string"
+            }
+          }
+        },
+        "User": {
+          "title": "User",
+          "required": [
+            "id",
+            "uuid"
+          ],
+          "type": "object",
+          "properties": {
+            "id": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "uuid": {
+              "title": "Uuid",
+              "type": "string"
+            }
+          }
+        },
+        "UserPOST": {
+          "title": "UserPOST",
+          "required": [
+            "username"
+          ],
+          "type": "object",
+          "properties": {
+            "username": {
+              "title": "Username",
+              "type": "string"
+            }
+          }
+        },
+        "UsersList": {
+          "title": "UsersList",
+          "required": [
+            "id",
+            "uuid",
+            "username"
+          ],
+          "type": "object",
+          "properties": {
+            "id": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "uuid": {
+              "title": "Uuid",
+              "type": "string"
+            },
+            "username": {
+              "title": "Username",
+              "type": "string"
+            }
+          }
+        },
+        "ValidationError": {
+          "title": "ValidationError",
+          "required": [
+            "loc",
+            "msg",
+            "type"
+          ],
+          "type": "object",
+          "properties": {
+            "loc": {
+              "title": "Location",
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "integer"
+                  }
+                ]
+              }
+            },
+            "msg": {
+              "title": "Message",
+              "type": "string"
+            },
+            "type": {
+              "title": "Error Type",
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
