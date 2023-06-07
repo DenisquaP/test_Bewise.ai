@@ -3,7 +3,7 @@ services:
   postgres:
     image: postgres
     volumes:
-      - postgres_data_task1:/var/lib/postgresql/data/
+      - postgres_data_task2:/var/lib/postgresql/data/
     restart: always
     environment:
       - POSTGRES_USER=postgres

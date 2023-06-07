@@ -1,12 +1,12 @@
 lin_compose:
-	sudo docker compose up -d
+	sudo docker compose up -d --build
 lin_migrate:
 	sudo docker exec task2-app-1 alembic upgrade heads
 lin_down:
 	sudo docker compose down && sudo docker rmi task2-app
 
 win_compose:
-	docker-compose up -d
+	docker-compose up -d --build
 win_migrate:
 	docker exec task2-app-1 alembic upgrade heads
 win_down:

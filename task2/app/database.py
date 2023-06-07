@@ -3,8 +3,6 @@ from sqlalchemy.ext.asyncio import (
     AsyncSession,
     create_async_engine,
 )
-from tables import Base
-
 from settings import settings
 
 engine = create_async_engine(
@@ -17,11 +15,6 @@ async_session = async_sessionmaker(
     expire_on_commit=False,
     class_=AsyncSession,
 )
-
-
-async def create_metadata():
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
 
 
 async def get_session():
